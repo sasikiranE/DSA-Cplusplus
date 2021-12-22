@@ -97,6 +97,23 @@ public:
 		count--;
 	}
 
+	int indexOf(int target) {
+		Node* curr = head;
+		int idx = 0;
+		while (curr != NULL) {
+			if (curr->data == target) {
+				return idx;
+			}
+			idx++;
+			curr = curr->next;
+		}
+		return -1;
+	}
+
+	bool contains(int target) {
+		return indexOf(target) != -1;
+	}
+
 	void print() {
 		Node* curr = head;
 		while (curr != NULL) {
@@ -105,7 +122,6 @@ public:
 		}
 		cout << "\n";
 	}
-
 };
 
 
