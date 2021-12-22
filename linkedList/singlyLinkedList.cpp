@@ -118,6 +118,23 @@ public:
 		}
 		cout << "\n";
 	}
+
+	void reverse() {
+		if (head == tail) {
+			return;
+		}
+		Node* curr = head->next;
+		Node* prev = head;
+		while (curr != NULL) {
+			Node* next = curr->next;
+			curr->next = prev;
+			prev = curr;
+			curr = next;
+		}
+		tail = head;
+		tail->next = NULL;
+		head = prev;
+	}
 };
 
 
