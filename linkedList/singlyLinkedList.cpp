@@ -2,13 +2,10 @@
 using namespace std;
 
 class LinkedList {
-
 private:
 
 	class Node {
-
 	public:
-
 		int data;
 		Node* next;
 
@@ -22,7 +19,6 @@ private:
 	Node* head;
 	Node* tail;
 	int count;
-
 public:
 
 	LinkedList() {
