@@ -137,18 +137,32 @@ public:
 		cout << root->data << " ";
 	}
 
+	// Breadth First traversal
+	void levelOrder() {
+		if (root == NULL) return;
+		queue<Node*> q;
+		q.push(root);
+		while (!q.empty()) {
+			Node* curr = q.front();
+			q.pop();
+			cout << curr->data << " ";
+			if (curr->left != NULL) q.push(curr->left);
+			if (curr->right != NULL) q.push(curr->right);
+		}
+		cout << "\n";
+	}
+
 };
 
 int main() {
-	BinarySearchTree bst = BinarySearchTree();
-	bst.insert(7);
-	bst.insert(4);
-	bst.insert(9);
-	bst.insert(1);
-	bst.insert(5);
-	bst.insert(8);
-	bst.insert(10);
-	cout << bst.getMin() << "\n";
-	cout << bst.getMax() << "\n";
+	// BinarySearchTree bst = BinarySearchTree();
+	// bst.insert(7);
+	// bst.insert(4);
+	// bst.insert(9);
+	// bst.insert(1);
+	// bst.insert(5);
+	// bst.insert(8);
+	// bst.insert(10);
+	// bst.levelOrder();
 	return 0;
 }
