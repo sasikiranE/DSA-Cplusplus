@@ -135,6 +135,25 @@ public:
 		tail->next = NULL;
 		head = prev;
 	}
+
+	int getKthFromEnd(int k) {
+		if (k <= 0 or k > count) {
+			return INT_MAX;
+		}
+		Node* a = head;
+		Node* b = head;
+		// move 'b' to (k - 1) distance apart from 'a'.
+		for (int i = 0; i < k - 1; i++) {
+			b = b->next;
+		}
+		// move 'a' and 'b' simultaneously until 'b' reaches the end.
+		while (b != tail) {
+			a = a->next;
+			b = b->next;
+		}
+		// return value at 'a'
+		return a->data;
+	}
 };
 
 
