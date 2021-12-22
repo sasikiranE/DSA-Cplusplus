@@ -90,8 +90,8 @@ public:
 				curr = curr->next;
 			}
 			Node* temp = tail;
+			curr->next = NULL;
 			tail = curr;
-			tail->next = NULL;
 			delete temp;
 		}
 		count--;
@@ -111,10 +111,5 @@ public:
 
 int main() {
 	LinkedList nums = LinkedList();
-	for (int i = 1; i <= 5; i++) {
-		nums.addLast(i);
-	}
-	nums.removeLast();
-	nums.print();
 	return 0;
 }
