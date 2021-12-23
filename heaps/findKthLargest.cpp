@@ -79,10 +79,7 @@ private:
 
 
 int findKthLargest(vector<int>& nums, int k) {
-	maxHeap heap = maxHeap();
-	for (int i = 0; i < nums.size(); i++) {
-		heap.insert(nums[i]);
-	}
+	maxHeap heap = maxHeap(nums);
 	for (int i = 0; i < k - 1; i++) {
 		heap.pop();
 	}
