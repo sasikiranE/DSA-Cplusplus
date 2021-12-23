@@ -10,13 +10,28 @@ public:
         size = 0;
     }
 
+    maxHeap(vector<int> &arr) {
+        size = arr.size();
+        for (int i = 0; i < size; i++) {
+            items.push_back(arr[i]);
+        }
+        for (int i = size / 2 - 1; i >= 0; i--) {
+            heapify(i);
+        }
+    }
+
     void insert(int value) {
         items.push_back(value);
         size++;
         bubbleUp();
     }
 
-    void remove() {
+    int top() {
+        if (size == 0) return INT_MIN;
+        return items[0];
+    }
+
+    void pop() {
         if (size == 0) {
             return;
         }
