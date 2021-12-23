@@ -90,6 +90,14 @@ public:
 		return curr->data;
 	}
 
+	bool equals(BinarySearchTree &other) {
+		return equals(root, other.root);
+	}
+
+	bool isBinarySearchTree() {
+		return isBinarySearchTree(root, INT_MIN, INT_MAX);
+	}
+
 	// Depth First Travesals.
 	void preOrder() {
 		preOrder(root);
@@ -129,6 +137,28 @@ private:
 		return 1 + max(height(root->left), height(root->right));
 	}
 
+	bool equals(Node* root1, Node* root2) {
+		if (root1 == NULL and root2 == NULL) {
+			return true;
+		}
+		if (root1 != NULL and root2 != NULL) {
+			return root1->data == root2->data and equals(root1->left, root2->left) and equals(root1->right, root2->right);
+		}
+		return false;
+	}
+
+	bool isBinarySearchTree(Node* root, int low, int high) {
+		if (root == NULL) {
+			return true;
+		}
+		if (root->data < low or root->data > high) {
+			return false;
+		}
+		else {
+			return isBinarySearchTree(root->left, low, root->data - 1) and isBinarySearchTree(root->right, root->data + 1, high);
+		}
+	}
+
 	void preOrder(Node* root) {
 		if (root == NULL) {
 			return;
@@ -157,6 +187,7 @@ private:
 	}
 
 };
+
 
 int main() {
 	BinarySearchTree bst = BinarySearchTree();
