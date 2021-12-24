@@ -41,13 +41,23 @@ private:
             root->right = insert(root->right, value);
         }
         root->height = 1 + max(height(root->left), height(root->right));
+        balance(root);
+        return root;
+    }
+
+    void balance(Node* root) {
         if (leftHeavy(root)) {
-            cout << root->data << " is leftHeavy" << "\n";
+            if (balanceFactor(root->left) < 0) {
+                cout << "left rotate " << root->left->data << "\n";
+            }
+            cout << "right rotate " << root->data << "\n";
         }
         else if (rightHeavy(root)) {
-            cout << root->data << " is rightHeavy" << "\n";
+            if (balanceFactor(root->right) > 0) {
+                cout << "right rotate " << root->right->data << "\n";
+            }
+            cout << "left rotate " << root->data << "\n";
         }
-        return root;
     }
 
     int height(Node* node) {
@@ -76,8 +86,8 @@ private:
 
 int main() {
     AVLTree tree = AVLTree();
+    tree.insert(10);
     tree.insert(30);
     tree.insert(20);
-    tree.insert(10);
     return 0;
 }
