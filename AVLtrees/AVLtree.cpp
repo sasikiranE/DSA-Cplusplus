@@ -29,6 +29,16 @@ public:
         preOrder(root);
         cout << "\n";
     }
+
+    void inOrder() {
+        inOrder(root);
+        cout << "\n";
+    }
+
+    void postOrder() {
+        postOrder(root);
+        cout << "\n";
+    }
 private:
     Node* insert(Node* root, int value) {
         if (root == NULL) {
@@ -40,24 +50,46 @@ private:
         else {
             root->right = insert(root->right, value);
         }
-        root->height = 1 + max(height(root->left), height(root->right));
-        balance(root);
-        return root;
+        setHeight(root);
+        return balance(root); 
     }
 
-    void balance(Node* root) {
+    Node* balance(Node* root) {
         if (leftHeavy(root)) {
             if (balanceFactor(root->left) < 0) {
-                cout << "left rotate " << root->left->data << "\n";
+                root->left = rotateLeft(root->left);
             }
-            cout << "right rotate " << root->data << "\n";
+            return rotateRight(root);
         }
         else if (rightHeavy(root)) {
             if (balanceFactor(root->right) > 0) {
-                cout << "right rotate " << root->right->data << "\n";
+                root->right = rotateRight(root->right);
             }
-            cout << "left rotate " << root->data << "\n";
+            return rotateLeft(root);
         }
+        return root;
+    }
+
+    Node* rotateLeft(Node* root) {
+        Node* newRoot = root->right;
+        root->right = newRoot->left;
+        newRoot->left = root;
+        setHeight(root);
+        setHeight(newRoot);
+        return newRoot;
+    }
+
+    Node* rotateRight(Node* root) {
+        Node* newRoot = root->left;
+        root->left = newRoot->right;
+        newRoot->right = root;
+        setHeight(root);
+        setHeight(newRoot);
+        return newRoot;
+    }
+
+    void setHeight(Node* node) {
+        node->height = 1 + max(height(node->left), height(node->right));
     }
 
     int height(Node* node) {
@@ -82,12 +114,29 @@ private:
         preOrder(node->left);
         preOrder(node->right);
     }
+
+    void inOrder(Node* node) {
+        if (node == NULL) return;
+        inOrder(node->left);
+        cout << node->data << " ";
+        inOrder(node->right);
+    }
+
+    void postOrder(Node* node) {
+        if (node == NULL) return;
+        postOrder(node->left);
+        postOrder(node->right);
+        cout << node->data << " ";
+    }
 };
 
 int main() {
     AVLTree tree = AVLTree();
-    tree.insert(10);
     tree.insert(30);
+    tree.insert(10);
     tree.insert(20);
+    tree.preOrder();
+    tree.inOrder();
+    tree.postOrder();
     return 0;
 }
