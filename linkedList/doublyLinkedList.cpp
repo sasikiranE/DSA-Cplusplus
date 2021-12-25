@@ -39,6 +39,33 @@ public:
 		tail = newNode;
 	}
 
+	void addFirst(int value) {
+		Node* newNode = new Node(value);
+		if (isEmpty()) {
+			head = tail = newNode;
+			return;
+		}
+		head->prev = newNode;
+		newNode->next = head;
+		head = newNode;
+	}
+
+	void removeLast() {
+		if (isEmpty()) {
+			return;
+		}
+		if (head == tail) {
+			Node* temp = head;
+			head = tail = NULL;
+			delete temp;
+			return;
+		}
+		Node* temp = tail;
+		tail = tail->prev;
+		tail->next = NULL;
+		delete temp;
+	}
+
 	void printForward() {
 		Node* curr = head;
 		while (curr != NULL) {
@@ -61,10 +88,5 @@ public:
 
 int main() {
 	DoublyLinkedList nums = DoublyLinkedList();
-	nums.addLast(10);
-	nums.addLast(20);
-	nums.addLast(30);
-	nums.printForward();
-	nums.printReverse();
 	return 0;
 }
