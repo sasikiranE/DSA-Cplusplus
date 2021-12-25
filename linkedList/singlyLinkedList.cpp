@@ -30,9 +30,13 @@ public:
 		return count;
 	}
 
+	bool isEmpty() {
+		return head == NULL;
+	}
+
 	void addLast(int value) {
 		Node* newNode = new Node(value);
-		if (head == NULL) {
+		if (isEmpty()) {
 			head = tail = newNode;
 		}
 		else {
@@ -44,7 +48,7 @@ public:
 
 	void addFirst(int value) {
 		Node* newNode = new Node(value);
-		if (head == NULL) {
+		if (isEmpty()) {
 			head = tail = newNode;
 		}
 		else {
@@ -55,7 +59,7 @@ public:
 	}
 
 	void removeFirst() {
-		if (head == NULL) {
+		if (isEmpty()) {
 			return;
 		}
 		else if (head == tail) {
@@ -72,7 +76,7 @@ public:
 	}
 
 	void removeLast() {
-		if (head == NULL) {
+		if (isEmpty()) {
 			return;
 		}
 		else if (head == tail) {
