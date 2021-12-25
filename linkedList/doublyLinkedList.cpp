@@ -66,6 +66,22 @@ public:
 		delete temp;
 	}
 
+	void removeFirst() {
+		if (isEmpty()) {
+			return;
+		}
+		if (head == tail) {
+			Node* temp = head;
+			head = tail = NULL;
+			delete temp;
+			return;
+		}
+		Node* temp = head;
+		head = head->next;
+		head->prev = NULL;
+		delete temp;
+	}
+
 	void printForward() {
 		Node* curr = head;
 		while (curr != NULL) {
