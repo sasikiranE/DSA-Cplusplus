@@ -60,7 +60,7 @@ public:
 
 	void removeFirst() {
 		if (isEmpty()) {
-			return;
+			throw underflow_error("list is already empty! cannot perform remove operation!");
 		}
 		else if (head == tail) {
 			Node* temp = head;
@@ -77,7 +77,7 @@ public:
 
 	void removeLast() {
 		if (isEmpty()) {
-			return;
+			throw underflow_error("list is already empty! cannot perform remove operation!");
 		}
 		else if (head == tail) {
 			Node* temp = head;
