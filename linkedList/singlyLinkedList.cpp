@@ -72,7 +72,7 @@ public:
 			head = head->next;
 			delete temp;
 		}
-		count++;
+		count--;
 	}
 
 	void removeLast() {
