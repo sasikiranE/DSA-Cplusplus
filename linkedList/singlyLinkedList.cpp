@@ -97,6 +97,29 @@ public:
 		count--;
 	}
 
+	void removeNodeAt(int position) {
+		if (position < 0 or position > size() - 1) {
+			throw invalid_argument("invalid value for position!.");
+		}
+		if (position == 0) {
+			removeFirst();
+			return;
+		}
+		if (position == size() - 1) {
+			removeLast();
+			return;
+		}
+		int k = position - 1;
+		Node* prev = head;
+		while (k--) {
+			prev = prev->next;
+		}
+		Node* curr = prev->next;
+		prev->next = curr->next;
+		curr->next = NULL;
+		delete curr;
+	}
+
 	int indexOf(int target) {
 		Node* curr = head;
 		int idx = 0;
