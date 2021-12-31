@@ -2,10 +2,6 @@
 using namespace std;
 
 class SegmentTree {
-    /*
-        set(idx, val) => sets the value at index idx to val;
-        sum(l, r) => return sum from index = l to index = r - 1;
-    */
     int size;
     vector<long long> items;
 public:
@@ -16,50 +12,48 @@ public:
     }
 
     SegmentTree(vector<int> &arr) {
-        size = 1;
         int n = arr.size();
+        size = 1;
         while (size < n) size *= 2;
         items.assign(2 * size, 0LL);
-        build(arr, 0, 0, size);
+        for (int i = 0; i < n; i++) {
+            items[i + size] = arr[i];
+        }
+        for (int i = size - 1; i >= 1; i--) {
+            items[i] = merge(items[2 * i] , items[2 * i + 1]);
+        }
     }
 
-    void set(int idx, int val) {
-        set(idx, val, 0, 0, size);
+    void update(int idx, int val) {
+        update(idx, val, 1, 0, size - 1);
     }
 
-    long long sum(int l, int r) {
-        return sum(l, r, 0, 0, size);
+    long long solve(int a, int b) {
+        return solve(a, b, 1, 0, size - 1);
     }
 private:
-    void build(vector<int> &arr, int x, int lx, int rx) {
-        if (rx - lx == 1) {
-            if (lx < arr.size()) items[x] = arr[lx];
-            return;
-        }
-        int mid = lx + (rx - lx) / 2;
-        build(arr, 2 * x + 1, lx, mid);
-        build(arr, 2 * x + 2, mid, rx);
-        items[x] = items[2 * x + 1] + items[2 * x + 2];
+    long long merge(long long x, long long y) {
+        return x + y;
     }
 
-    void set(int idx, int val, int x, int lx, int rx) {
-        if (rx - lx == 1) {
-            items[x] = val;
+    void update(int idx, int val, int node, int left, int right) {
+        if (left == right) {
+            items[node] = val;
             return;
         }
-        int mid = lx + (rx - lx) / 2;
-        if (idx < mid) set(idx, val, 2 * x + 1, lx, mid);
-        else set(idx, val, 2 * x + 2, mid, rx);
-        items[x] = items[2 * x + 1] + items[2 * x + 2];
+        int mid = left + (right - left) / 2;
+        if (idx >= left && idx <= mid) update(idx, val, 2 * node, left, mid);
+        else update(idx, val, 2 * node + 1, mid + 1, right);
+        items[node] = merge(items[2 * node], items[2 * node + 1]);
     }
 
-    long long sum(int l, int r, int x, int lx, int rx) {
-        if (lx >= r || rx <= l) return 0;
-        if (lx >= l && rx <= r) return items[x];
-        int mid = lx + (rx - lx) / 2;
-        long long s1 = sum(l, r, 2 * x + 1, lx, mid);
-        long long s2 = sum(l, r, 2 * x + 2, mid, rx);
-        return s1 + s2;
+    long long solve(int a, int b, int node, int left, int right) {
+        if (left > b || right < a) return 0;
+        if (left >= a && right <= b) return items[node];
+        int mid = left + (right - left) / 2;
+        long long s1 = solve(a, b, 2 * node, left, mid);
+        long long s2 = solve(a, b, 2 * node + 1, mid + 1, right);
+        return merge(s1, s2);
     }
 };
 
