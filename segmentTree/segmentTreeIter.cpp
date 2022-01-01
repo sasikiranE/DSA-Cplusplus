@@ -40,8 +40,8 @@ struct segementTree {
         b += size;
         long long ans = 0;
         while (a <= b) {
-            if (a % 2 == 1) ans = merge(ans, tree[a++]);
-            if (b % 2 == 0) ans = merge(ans, tree[b--]);
+            if (a % 2 == 1) ans = merge(tree[a++], ans);
+            if (b % 2 == 0) ans = merge(tree[b--], ans);
             a /= 2;
             b /= 2;
         }
