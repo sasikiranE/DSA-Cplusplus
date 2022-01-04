@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+
 using namespace std;
 
 int linearSearch(vector<int> &arr, int target) {

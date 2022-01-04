@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+
 using namespace std;
 
 class maxHeap {
@@ -78,15 +79,15 @@ private:
 };
 
 
-int findKthLargest(vector<int>& nums, int k) {
-	maxHeap heap = maxHeap(nums);
-	for (int i = 0; i < k - 1; i++) {
-		heap.pop();
-	}
-	return heap.top();
+int findKthLargest(vector<int> &nums, int k) {
+    maxHeap heap = maxHeap(nums);
+    for (int i = 0; i < k - 1; i++) {
+        heap.pop();
+    }
+    return heap.top();
 }
 
 
 int main() {
-	return 0;
+    return 0;
 }

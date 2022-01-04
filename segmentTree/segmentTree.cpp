@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 class SegmentTree {
@@ -20,7 +21,7 @@ public:
             items[i + size] = arr[i];
         }
         for (int i = size - 1; i >= 1; i--) {
-            items[i] = merge(items[2 * i] , items[2 * i + 1]);
+            items[i] = merge(items[2 * i], items[2 * i + 1]);
         }
     }
 
@@ -31,6 +32,7 @@ public:
     long long solve(int a, int b) {
         return solve(a, b, 1, 0, size - 1);
     }
+
 private:
     long long merge(long long x, long long y) {
         return x + y;
@@ -59,5 +61,5 @@ private:
 
 
 int main() {
-	return 0;
+    return 0;
 }

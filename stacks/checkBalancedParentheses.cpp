@@ -1,20 +1,23 @@
 #include<bits/stdc++.h>
+
 using namespace std;
 
 bool checkBalancedParentheses(string &str) {
     unordered_map<char, int> ump = {
-        {'(', 1}, {')', -1},
-        {'{', 2}, {'}', -2},
-        {'[', 3}, {']', -3}
+            {'(', 1},
+            {')', -1},
+            {'{', 2},
+            {'}', -2},
+            {'[', 3},
+            {']', -3}
     };
 
     stack<char> st;
-    for (int i = 0; i < str.size() ; i++) {
+    for (int i = 0; i < str.size(); i++) {
         char c = str[i];
         if (ump[c] > 0) {
             st.push(c);
-        }
-        else {
+        } else {
             if (st.empty()) return false;
             if (ump[c] + ump[st.top()] != 0) return false;
             st.pop();

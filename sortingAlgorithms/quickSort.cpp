@@ -1,11 +1,12 @@
 #include<bits/stdc++.h>
+
 using namespace std;
 
 int partition(vector<int> &arr, int start, int end) {
     // select last element as pivot.
     int pivot = arr[end];
     int boundary = start - 1;
-    for (int i = start; i <= end ; i++) {
+    for (int i = start; i <= end; i++) {
         if (arr[i] <= pivot) {
             swap(arr[i], arr[++boundary]);
         }
@@ -28,7 +29,7 @@ void QuickSort(vector<int> &arr) {
 int main() {
     vector<int> arr = {};
     QuickSort(arr);
-    for (auto &e : arr) {
+    for (auto &e: arr) {
         cout << e << " ";
     }
     cout << "\n";

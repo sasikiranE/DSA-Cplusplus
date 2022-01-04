@@ -1,11 +1,12 @@
 #include<bits/stdc++.h>
+
 using namespace std;
 
 // Reverse a string using stack.
 string reverseString(string &str) {
     string ans;
     stack<char> st;
-    for (char c : str) {
+    for (char c: str) {
         st.push(c);
     }
     while (!st.empty()) {

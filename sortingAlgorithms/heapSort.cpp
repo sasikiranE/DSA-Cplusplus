@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+
 using namespace std;
 
 class maxHeap {
@@ -94,7 +95,7 @@ void heapSort(vector<int> &arr) {
 int main() {
     vector<int> arr = {64, 34, 25, 12, 22, 11, 90, 25, 32, 11};
     heapSort(arr);
-    for (auto &e : arr) {
+    for (auto &e: arr) {
         cout << e << " ";
     }
     cout << "\n";
